@@ -2,32 +2,32 @@
 
 from Queue import Queue
 from threading import Thread
-from io import io
+import RPi.GPIO as GPIO
 from drive import *
 from lights import *
 from sensors import *
 from cv import *
 
-# def functions & setup code
+START = 11
 
-try:
-    print("starting...")
-    drive_q = Queue()
-    lights_q = Queue()
-    sensors_q = Queue()
-    cv_q = Queue()
-    io_thread = Thread(target=io, args=(drive_q, lights_q, sensors_q, cv_q, ))
-    drive_thread = Thread(target=drive, args=(drive_q, ))
-    lights_thread = Thread(target=lights, args=(lights_q, ))
-    sensors_thread = Thread(target=sensors, args=(sensors_q, ))
-    cv_thread = Thread(target=cv, args=(cv_q, ))
-    io_thread.start()
-    drive_thread.start()
-    lights_thread.start()
-    sensors_thread.start()
-    cv_thread.start()
-    # start sensors, lights, & cv threads
-    # wait for start button press then start motor control thread
-finally:
-    pass
-    # shutdown code to stop motors & make all outputs low
+print("initializing...")
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(START, GPIO.IN)
+
+drive_q = Queue()
+lights_q = Queue()
+
+drive_thread = Thread(target=drive, args=(drive_q, ))
+lights_thread = Thread(target=lights, args=(lights_q, ))
+sensors_thread = Thread(target=sensors, args=(drive_q, lights_q, ))
+cv_thread = Thread(target=cv, args=(drive_q, lights_q, ))
+
+print("starting...")
+lights_thread.start()
+sensors_thread.start()
+cv_thread.start()
+print("waiting for start button...")
+GPIO.wait_for_edge(START, GPIO.RISING)
+print("driving...")
+drive_thread.start()
