@@ -1,6 +1,6 @@
 # main driving program
 
-from Queue import Queue
+from queue import Queue
 from threading import Thread
 import RPi.GPIO as GPIO
 from drive import *

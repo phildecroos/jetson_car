@@ -11,7 +11,7 @@ IN3 = 38
 IN4 = 40
 
 def get_steer(data):
-    steer_speed = SPEED * (1 - (int(abs(data) / 10)))
+    steer_speed = int(SPEED * (1 - (abs(data) / 10)))
     if steer_speed == 0:
         steer_speed = 1
     return steer_speed
@@ -26,8 +26,8 @@ def drive(drive_q):
         GPIO.setup(IN3, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(IN4, GPIO.OUT, initial=GPIO.LOW)
         pwmL = GPIO.PWM(ENL, 100)
-        pwmL.start(10)
         pwmR = GPIO.PWM(ENR, 100)
+        pwmL.start(10)
         pwmR.start(10)
         stop_latch = 1
 
@@ -40,7 +40,9 @@ def drive(drive_q):
                     pwmL.ChangeDutyCycle(SPEED)
                     pwmR.ChangeDutyCycle(SPEED)
                     GPIO.output(IN1, GPIO.HIGH)
+                    GPIO.output(IN2, GPIO.LOW)
                     GPIO.output(IN3, GPIO.HIGH)
+                    GPIO.output(IN4, GPIO.LOW)
             elif data == "STOP":
                 stop_latch = 1
                 GPIO.output(IN1, GPIO.LOW)
