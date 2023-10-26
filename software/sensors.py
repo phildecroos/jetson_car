@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 WHEELS = 12
 BUMPER = 13
 
-def sensors(drive_q, lights_q):
+def sensors(stop_q, drive_q, lights_q):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(WHEELS, GPIO.IN)
     GPIO.setup(BUMPER, GPIO.IN)
@@ -14,7 +14,7 @@ def sensors(drive_q, lights_q):
     bumper_latch = 0
     drive_latch = 0
 
-    while True:
+    while not stop_q.qsize():
         wheels_data = GPIO.input(WHEELS)
         bumper_data = GPIO.input(BUMPER)
 
