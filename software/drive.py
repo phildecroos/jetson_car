@@ -21,7 +21,7 @@ def get_steer(data):
     return steer_speed
 
 def drive(stop_q, drive_q):
-    
+
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(ENL, GPIO.OUT)
     GPIO.setup(IN1, GPIO.OUT, initial=GPIO.LOW)
@@ -37,7 +37,7 @@ def drive(stop_q, drive_q):
 
     while not stop_q.qsize():
         data = drive_q.get()
-        
+
         if stop_latch:
             if data == "START":
                 stop_latch = 0

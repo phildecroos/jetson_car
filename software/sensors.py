@@ -32,7 +32,7 @@ def sensors(stop_q, drive_q, lights_q):
             lights_q.put(0)
         elif wheels_data and wheels_latch:
             wheels_latch = 0
-        
+
         if not bumper_data and wheels_data and not drive_latch:
             drive_latch = 1
             drive_q.put("START")
