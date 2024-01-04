@@ -2,7 +2,7 @@
 
 Self-driving car project.
 
-![Alt text](misc/car.png)
+![car](misc/car.png)
 
 ## Requirements
 
