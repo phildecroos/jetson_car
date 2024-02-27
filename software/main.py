@@ -1,13 +1,14 @@
 # main driving program
 
+import time
 from queue import Queue
 from threading import Thread
-import time
+
 import RPi.GPIO as GPIO
+from cv import *  # replace wildcards with functions after code structure finalized
 from drive import *
 from lights import *
 from sensors import *
-from cv import *
 
 STARTSTOP = 11
 
@@ -20,10 +21,10 @@ drive_q = Queue()
 lights_q = Queue()
 stop_q = Queue()
 
-drive_thread = Thread(target=drive, args=(stop_q, drive_q, ))
-lights_thread = Thread(target=lights, args=(stop_q, lights_q, ))
-sensors_thread = Thread(target=sensors, args=(stop_q, drive_q, lights_q, ))
-cv_thread = Thread(target=cv, args=(stop_q, drive_q, lights_q, ))
+drive_thread = Thread(target=drive, args=(stop_q, drive_q))
+lights_thread = Thread(target=lights, args=(stop_q, lights_q))
+sensors_thread = Thread(target=sensors, args=(stop_q, drive_q, lights_q))
+cv_thread = Thread(target=cv, args=(stop_q, drive_q, lights_q))
 
 print("starting...")
 lights_thread.start()

@@ -1,10 +1,12 @@
 # sensor reading code
 
 import time
+
 import RPi.GPIO as GPIO
 
 WHEELS = 12
 BUMPER = 13
+
 
 def sensors(stop_q, drive_q, lights_q):
     GPIO.setmode(GPIO.BOARD)

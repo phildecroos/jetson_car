@@ -1,7 +1,8 @@
 # cv code
 
-import time
 import random
+import time
+
 
 def cv(stop_q, drive_q, lights_q):
     while not stop_q.qsize():

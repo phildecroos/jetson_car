@@ -1,12 +1,13 @@
 # motor control code
 
-import RPi.GPIO as GPIO
 import subprocess
+
+import RPi.GPIO as GPIO
 
 set_pwm = subprocess.Popen("software/pwm.sh")
 set_pwm.wait()
 
-SPEED = 50 # 1 to 99
+SPEED = 50  # 1 to 99
 ENL = 32
 IN1 = 35
 IN2 = 36
@@ -14,14 +15,15 @@ ENR = 33
 IN3 = 38
 IN4 = 40
 
+
 def get_steer(data):
     steer_speed = int(SPEED * (1 - (abs(data) / 10)))
     if steer_speed == 0:
         steer_speed = 1
     return steer_speed
 
-def drive(stop_q, drive_q):
 
+def drive(stop_q, drive_q):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(ENL, GPIO.OUT)
     GPIO.setup(IN1, GPIO.OUT, initial=GPIO.LOW)

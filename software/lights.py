@@ -4,8 +4,8 @@ import RPi.GPIO as GPIO
 
 DRIVING = 7
 
-def lights(stop_q, lights_q):
 
+def lights(stop_q, lights_q):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(DRIVING, GPIO.OUT, initial=GPIO.LOW)
 
