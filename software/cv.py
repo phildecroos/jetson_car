@@ -3,6 +3,8 @@
 import random
 import time
 
+import tensorflow as tf
+
 
 def cv(stop_q, drive_q, lights_q):
     while not stop_q.qsize():

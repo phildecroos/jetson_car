@@ -1,19 +1,22 @@
 # jetson_car
 
-Self-driving car project.
+Self-driving car project. It's still in progress, being built to autonomously drive around a track as quickly as possible. It uses edge detection to find the sides of the path and then passes that edge tensor into a model that calculates a steering command to keep the robot on the path.
 
-![car](misc/car.png)
+(I still need to come up with a proper name for it 😂)
 
-## Requirements
+<img src="misc/car.png" height="300">
 
-This code runs on an Nvidia Jetson Nano with the JetPack SDK, developed and tested with Python 3.6.9.
+## Software
+- JetPack SDK
+- Python 3.6.9
+- Libraries: RPi.GPIO 0.7.1
+- SolidWorks 2022
 
-It uses an L298N DC motor driver and 2 DC motors to drive. For steering it slows down one of the motors.
+## Hardware
+- Nvidia Jetson Nano
+- L298N DC Motor Driver
+- 2 PM DC Motors (6-12V)
 
-The CAD is designed with SolidWorks 2022 (all parts are SLDPRT). DXF and STL files are also provided for laser-cut and 3D-printed parts, respectively.
+Schematic:
 
-drive.py runs pwm.sh which runs sudo commands that set registers to configure GPIO pins 32 and 33 as PWM (needs a bunch of configuration for that to work, not needed if those pins are properly configured to PWM)
-
-## Schematic
-
-![schematic](misc/schematic.jpg)
+<img src="misc/schematic.jpg" height="300">
