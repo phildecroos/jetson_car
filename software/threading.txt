@@ -1,0 +1,40 @@
+Thread & Queue Structure
+
+Threads:
+main
+- initializes all queues
+- facilitates running/stopping other threads
+- consumes: status_q
+- produces: stop_q
+
+motors
+- outputs to GPIO connected to motor driver
+- consumes: stop_q, motors_q
+- produces: status_q
+
+leds
+- outputs to GPIO connected to status LEDs
+- consumes: stop_q, leds_q
+- produces: status_q
+
+sensors
+- reads from GPIO connected to sensors
+- consumes: stop_q
+- produces: status_q, map_q, motors_q, leds_q
+
+path
+- produces map of the environment, plans robot path
+- consumes: stop_q, map_q
+- produces: status_q, motors_q
+
+cv
+- reads from camera and processes images into map data
+- consumes: stop_q
+- produces: status_q, map_q, leds_q
+
+Queues:
+stop_q    - all threads stop when something is added to this
+status_q  - status messages to be printed
+map_q     - map/position data
+motors_q  - motor control commands
+leds_q    - led control commands

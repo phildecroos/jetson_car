@@ -1,0 +1,11 @@
+{
+    "START_BUTTON": 11,
+    "FLOOR_SENSOR": 12,
+    "BUMPER_SENSOR": 13,
+    "L_ENABLE": 32,
+    "L_PHASE": 35,
+    "R_ENABLE": 33,
+    "R_PHASE": 36,
+    "RUNNING_LED": 7,
+    "FAULT_LED": 7
+}
