@@ -1,4 +1,4 @@
-import tensorflow as tf
+# import tensorflow as tf
 
 
 def cv(pinout, status_q, stop_q, map_q, leds_q):

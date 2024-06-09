@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import time
 from queue import Queue
@@ -15,7 +16,7 @@ from sensors import sensors
 def main():
     print("initializing")
 
-    set_pwm = subprocess.Popen("software/pwm.sh")
+    set_pwm = subprocess.Popen(os.path.join(os.getcwd(), "pwm.sh"))
     set_pwm.wait()
 
     GPIO.setwarnings(False)
@@ -43,8 +44,8 @@ def main():
     path_thread.start()
     cv_thread.start()
 
-    print("ready, waiting for start button")
-    GPIO.wait_for_edge(pinout["START_BUTTON"], GPIO.RISING)
+    print("ready, waiting for start button (SKIPPED)")
+    # GPIO.wait_for_edge(pinout["START_BUTTON"], GPIO.RISING)
 
     print("starting")
     motors_thread.start()
