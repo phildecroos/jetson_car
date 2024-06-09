@@ -12,7 +12,7 @@ def sensors(pinout, status_q, stop_q, map_q, motors_q, leds_q):
     drive_latch = 0
 
     while not stop_q.qsize():
-        # TODO - read inputs from motor encoders and send data to map_q
+        # TODO - process inputs from motor encoders into apprx distance moved and send data to map_q
         wheels_data = GPIO.input(pinout["FLOOR_SENSOR"])
         bumper_data = GPIO.input(pinout["BUMPER_SENSOR"])
 
